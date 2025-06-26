@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Feedback History</h2>
+{% for fb in feedbacks %}
+<div class="feedback-card">
+    <b>From:</b> {{ fb.manager_id }}<br>
+    <b>To:</b> {{ fb.employee_id }}<br>
+    <b>Strengths:</b> {{ fb.strengths }}<br>
+    <b>Areas to Improve:</b> {{ fb.areas_to_improve }}<br>
+    <b>Sentiment:</b> {{ fb.sentiment }}<br>
+    <b>Tags:</b>
+    {% for tag in fb.tags %}
+        <span class="tag">{{ tag }}</span>
+    {% endfor %}
+    <br>
+    <b>Acknowledged:</b> {{ "Yes" if fb.acknowledged else "No" }}<br>
+    <b>Employee Comment:</b>
+    <div class="comment-display">
+        {{ fb.employee_comment | safe if fb.employee_comment else "No comment added yet." }}
+    </div>
+</div>
+{% endfor %}
+<a href="/dashboard">Back to Dashboard</a> | <a href="/feedback/export" target="_blank">Export as PDF</a>
+{% endblock %} 

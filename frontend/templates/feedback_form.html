@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Submit Feedback</h2>
+<form method="post">
+    <label>Strengths</label>
+    <textarea name="strengths" required></textarea>
+    <label>Areas to Improve</label>
+    <textarea name="areas_to_improve" required></textarea>
+    <label>Sentiment</label>
+    <select name="sentiment" required>
+        <option value="positive">Positive</option>
+        <option value="neutral">Neutral</option>
+        <option value="negative">Negative</option>
+    </select>
+    <label>Tags (comma separated)</label>
+    <input type="text" name="tags">
+    <button type="submit">Submit</button>
+</form>
+{% endblock %} 

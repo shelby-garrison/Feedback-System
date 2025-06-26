@@ -1,0 +1,3 @@
+# Only ignore __pycache__ in frontend and backend/app
+/frontend/__pycache__/
+/backend/app/__pycache__/

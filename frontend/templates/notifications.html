@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Notifications</h2>
+<form method="post" action="/notifications/clear_all" style="margin-bottom: 1em; display: inline;">
+    <button type="submit" class="button-link">Clear All</button>
+</form>
+<ul>
+    {% for n in notifications %}
+    <li>
+        {{ n.message }} ({{ n.created_at }}) {% if not n.read %}<b>[NEW]</b>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="/dashboard" class="button-link">Back to Dashboard</a>
+{% endblock %} 

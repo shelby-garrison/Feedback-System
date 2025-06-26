@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Give Anonymous Peer Feedback</h2>
+<p>This feedback will be sent anonymously. Your identity will not be revealed to your peer.</p>
+
+{% if error %}
+    <div class="error" style="color:red;">{{ error }}</div>
+{% endif %}
+{% if message %}
+    <div class="message" style="color:green;">{{ message }}</div>
+{% endif %}
+
+<form method="post" action="/peer-review">
+    <div style="margin-bottom: 1em;">
+        <label for="reviewee_id">Select a Peer to Review:</label><br>
+        <select name="reviewee_id" id="reviewee_id" required>
+            <option value="">-- Select a teammate --</option>
+            {% for peer in peers %}
+            <option value="{{ peer.id }}">{{ peer.full_name }} ({{ peer.username }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div style="margin-bottom: 1em;">
+        <label for="strengths">Strengths:</label><br>
+        <textarea name="strengths" rows="4" cols="50" required></textarea>
+    </div>
+
+    <div style="margin-bottom: 1em;">
+        <label for="areas_to_improve">Areas to Improve:</label><br>
+        <textarea name="areas_to_improve" rows="4" cols="50" required></textarea>
+    </div>
+
+    <div style="margin-bottom: 1em;">
+        <label for="sentiment">Overall Sentiment:</label><br>
+        <select name="sentiment" required>
+            <option value="positive">Positive</option>
+            <option value="neutral">Neutral</option>
+            <option value="negative">Negative</option>
+        </select>
+    </div>
+
+    <button type="submit">Submit Anonymous Review</button>
+</form>
+
+<hr>
+<a href="/dashboard">Back to Dashboard</a>
+{% endblock %} 

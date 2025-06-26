@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.full_name }} (Employee)</h2>
+
+{% if error %}
+    <div class="error" style="color:red; margin-bottom: 1em;">{{ error }}</div>
+{% endif %}
+{% if message %}
+    <div class="message" style="color:green; margin-bottom: 1em;">{{ message }}</div>
+{% endif %}
+
+<h3>Your Feedback Timeline</h3>
+{% for fb in feedbacks %}
+<div class="feedback-card">
+    <b>From:</b> {{ fb.manager_id }}<br>
+    <b>Strengths:</b> {{ fb.strengths }}<br>
+    <b>Areas to Improve:</b> {{ fb.areas_to_improve }}<br>
+    <b>Sentiment:</b> {{ fb.sentiment }}<br>
+    <b>Tags:</b>
+    {% for tag in fb.tags %}
+        <span class="tag">{{ tag }}</span>
+    {% endfor %}
+    <br>
+    <b>Acknowledged:</b> {{ "Yes" if fb.acknowledged else "No" }}<br>
+    <b>Your Comment:</b>
+    <div class="comment-display">
+        {{ fb.employee_comment | safe if fb.employee_comment else "No comment added yet." }}
+    </div>
+    {% if not fb.employee_comment %}
+    <form method="post" action="/feedback/{{ fb.id }}/comment" style="margin-top:0.5em;">
+        <textarea name="comment" placeholder="Add a comment (Markdown supported)" required rows="3" style="width: 100%;"></textarea>
+        <button type="submit">Submit Comment</button>
+    </form>
+    {% endif %}
+    <a href="/feedback/{{ fb.id }}/export" target="_blank" class="button-link" style="margin-top:0.5em; display:inline-block;">Export as PDF</a>
+</div>
+{% endfor %}
+
+<div style="border-top: 1px solid #ccc; margin-top: 1.5em; padding-top: 1em;">
+    <form method="post" action="/request-feedback" style="display: inline; margin-right: 10px;">
+        <button type="submit" class="button-main">Request Feedback from Manager</button>
+    </form>
+    <a href="/peer-review" class="button-link" style="margin-right: 10px;">Give Peer Review</a>
+    <a href="/my-peer-reviews" class="button-link">View Peer Reviews</a>
+</div>
+
+<hr>
+<a href="/feedback/history" class="button-link">View All Feedback</a> | <a href="/notifications" class="button-link">Notifications{% if unread_count and unread_count > 0 %} <span class="notif-badge">{{ unread_count }}</span>{% endif %}</a> | <a href="/feedback/export" target="_blank" class="button-link">Export All as PDF</a>
+{% endblock %} 

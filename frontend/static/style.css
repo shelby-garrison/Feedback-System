@@ -1,0 +1,182 @@
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+h2, h3 {
+    color: #2d3a4b;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+    margin-bottom: 1.2em;
+}
+
+.feedback-card {
+    border: none;
+    box-shadow: 0 2px 12px rgba(44, 62, 80, 0.07), 0 1.5px 4px rgba(44, 62, 80, 0.03);
+    padding: 1.5em 2em;
+    margin-bottom: 2.2em;
+    border-radius: 14px;
+    background: #fff;
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+.feedback-card:not(:last-child)::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 1.5em;
+    right: 1.5em;
+    bottom: -1.1em;
+    height: 1px;
+    background: #e0e7ff;
+    opacity: 0.7;
+}
+.feedback-card:hover {
+    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.13), 0 2px 8px rgba(44, 62, 80, 0.06);
+}
+
+.comment-display p {
+    display: inline;
+    margin: 0;
+}
+
+.tag {
+    background: #f1f5f9;
+    color: #6366f1;
+    padding: 0.18em 0.7em;
+    border-radius: 10px;
+    font-size: 0.97em;
+    margin-right: 0.25em;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    border: 1px solid #c7d2fe;
+}
+
+.notif-badge {
+    background: #fbbf24;
+    color: #2d3a4b;
+    border-radius: 50%;
+    padding: 0.18em 0.7em;
+    font-size: 0.97em;
+    margin-left: 0.2em;
+    vertical-align: middle;
+    font-weight: bold;
+    box-shadow: 0 1px 4px rgba(251, 191, 36, 0.10);
+    border: 1px solid #fde68a;
+}
+
+.button-link, a.button-link, button.button-link {
+    background: linear-gradient(90deg, #6366f1 0%, #3b82f6 100%) !important;
+    color: #fff !important;
+    padding: 0.48em 1.25em;
+    border-radius: 7px;
+    text-decoration: none !important;
+    border: none !important;
+    display: inline-block;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+    margin-right: 0.5em;
+    font-weight: 500;
+    font-size: 1em;
+    box-shadow: 0 1px 4px rgba(99, 102, 241, 0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    outline: none;
+}
+.button-link:hover, a.button-link:hover, button.button-link:hover {
+    background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.13);
+    transform: translateY(-1px) scale(1.02);
+}
+.button-main, button.button-main {
+    background: linear-gradient(90deg, #22d3ee 0%, #38bdf8 100%) !important;
+    color: #fff !important;
+    padding: 0.48em 1.25em;
+    border-radius: 7px;
+    border: none !important;
+    font-weight: bold;
+    font-size: 1.05em;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(34, 211, 238, 0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    outline: none;
+}
+.button-main:hover, button.button-main:hover {
+    background: linear-gradient(90deg, #38bdf8 0%, #22d3ee 100%) !important;
+    box-shadow: 0 2px 8px rgba(34, 211, 238, 0.13);
+    transform: translateY(-1px) scale(1.02);
+}
+
+input[type="text"], textarea, select {
+    border: 1.5px solid #c7d2fe;
+    border-radius: 7px;
+    padding: 0.55em;
+    font-size: 1em;
+    background: #f8fafc;
+    margin-top: 0.2em;
+    margin-bottom: 0.7em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.2s;
+}
+input[type="text"]:focus, textarea:focus, select:focus {
+    border: 1.5px solid #c7d2fe;
+    border-radius: 7px;
+    padding: 0.55em;
+    font-size: 1em;
+    background: #f8fafc;
+    margin-top: 0.2em;
+    margin-bottom: 0.7em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border 0.2s;
+}
+
+form button[type="submit"] {
+    margin-top: 0.7em;
+}
+
+hr {
+    border: none;
+    border-top: 1.5px solid #e0e7ff;
+    margin: 2.5em 0 2em 0;
+}
+
+ul {
+    padding-left: 1.2em;
+}
+
+li {
+    margin-bottom: 0.7em;
+    font-size: 1.08em;
+}
+
+.error {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-radius: 7px;
+    padding: 0.7em 1em;
+    margin-bottom: 1em;
+    border: 1px solid #fecaca;
+}
+
+.message {
+    background: #d1fae5;
+    color: #047857;
+    border-radius: 7px;
+    padding: 0.7em 1em;
+    margin-bottom: 1em;
+    border: 1px solid #6ee7b7;
+}
+
+/* Add more whitespace to main content */
+main, .main-content, .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5em 1.5em 2em 1.5em;
+}

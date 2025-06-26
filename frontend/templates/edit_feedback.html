@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Feedback</h2>
+<form method="post" action="/feedback/edit/{{ feedback.id }}">
+    <div>
+        <label>Strengths:</label><br>
+        <textarea name="strengths" required rows="3" style="width: 100%;">{{ feedback.strengths }}</textarea>
+    </div>
+    <div style="margin-top: 1em;">
+        <label>Areas to Improve:</label><br>
+        <textarea name="areas_to_improve" required rows="3" style="width: 100%;">{{ feedback.areas_to_improve }}</textarea>
+    </div>
+    <div style="margin-top: 1em;">
+        <label>Sentiment:</label><br>
+        <select name="sentiment" required>
+            <option value="positive" {% if feedback.sentiment == 'positive' %}selected{% endif %}>Positive</option>
+            <option value="neutral" {% if feedback.sentiment == 'neutral' %}selected{% endif %}>Neutral</option>
+            <option value="negative" {% if feedback.sentiment == 'negative' %}selected{% endif %}>Negative</option>
+        </select>
+    </div>
+    <div style="margin-top: 1em;">
+        <label>Tags (comma separated):</label><br>
+        <input type="text" name="tags" value="{{ feedback.tags | join(', ') }}" style="width: 100%;">
+    </div>
+    <div style="margin-top: 1.5em;">
+        <button type="submit" class="button-main">Update Feedback</button>
+        <a href="/dashboard" class="button-link">Cancel</a>
+    </div>
+</form>
+{% if message %}
+    <div class="message" style="color:green; margin-top:1em;">{{ message }}</div>
+{% endif %}
+{% if error %}
+    <div class="error" style="color:red; margin-top:1em;">{{ error }}</div>
+{% endif %}
+{% endblock %} 

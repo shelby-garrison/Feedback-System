@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.full_name }} (Manager)</h2>
+
+{% if error %}
+    <div class="error" style="color:red; margin-bottom: 1em;">{{ error }}</div>
+{% endif %}
+{% if message %}
+    <div class="message" style="color:green; margin-bottom: 1em;">{{ message }}</div>
+{% endif %}
+
+{# Feedback count and sentiment trends #}
+{% set total = feedbacks|length %}
+{% set pos = feedbacks|selectattr('sentiment', 'equalto', 'positive')|list|length %}
+{% set neu = feedbacks|selectattr('sentiment', 'equalto', 'neutral')|list|length %}
+{% set neg = feedbacks|selectattr('sentiment', 'equalto', 'negative')|list|length %}
+<div style="margin-bottom:1em;">
+    <b>Total Feedbacks:</b> {{ total }}<br>
+    <b>Sentiment Trends:</b>
+    <span class="tag">Positive: {{ pos }}</span>
+    <span class="tag">Neutral: {{ neu }}</span>
+    <span class="tag">Negative: {{ neg }}</span>
+</div>
+
+<h3>Your Team</h3>
+<ul>
+    {% for emp in team %}
+    <li>
+        {{ emp.full_name }} ({{ emp.username }})
+        <a href="/feedback/new/{{ emp.id }}">Give Feedback</a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Feedback History</h3>
+{% for fb in feedbacks %}
+<div class="feedback-card">
+    <b>To:</b> {{ fb.employee_name or fb.employee_id }}<br>
+    <b>Strengths:</b> {{ fb.strengths }}<br>
+    <b>Areas to Improve:</b> {{ fb.areas_to_improve }}<br>
+    <b>Sentiment:</b> {{ fb.sentiment }}<br>
+    <b>Tags:</b>
+    {% for tag in fb.tags %}
+        <span class="tag">{{ tag }}</span>
+    {% endfor %}
+    <br>
+    <b>Acknowledged:</b> {{ "Yes" if fb.acknowledged else "No" }}<br>
+    <b>Employee Comment:</b>
+    <div class="comment-display">
+        {{ fb.employee_comment | safe if fb.employee_comment else "No comment added yet." }}
+    </div>
+    <a href="/feedback/{{ fb.id }}/export" target="_blank" class="button-link" style="margin-right: 1em;">Export as PDF</a>
+    <a href="/feedback/edit/{{ fb.id }}" class="button-link">Edit</a>
+</div>
+{% endfor %}
+<a href="/feedback/history" class="button-link">View All Feedback</a> | <a href="/notifications" class="button-link">Notifications{% if unread_count and unread_count > 0 %} <span class="notif-badge">{{ unread_count }}</span>{% endif %}</a> | <a href="/feedback/export" target="_blank" class="button-link">Export All as PDF</a>
+{% endblock %} 

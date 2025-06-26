@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Anonymous Peer Reviews</h2>
+<p>Here you can see the anonymous feedback your peers have shared with you.</p>
+
+{% if not reviews %}
+<p>You have not received any peer reviews yet.</p>
+{% else %}
+    {% for review in reviews %}
+    <div class="feedback-card">
+        <b>Sentiment:</b> <span class="tag">{{ review.sentiment }}</span><br>
+        <b>Strengths:</b><br>
+        <p style="margin-top: 0.2em;">{{ review.strengths }}</p>
+        <b>Areas to Improve:</b><br>
+        <p style="margin-top: 0.2em;">{{ review.areas_to_improve }}</p>
+        <small>Received on: {{ review.created_at.split('T')[0] }}</small>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<hr>
+<a href="/dashboard">Back to Dashboard</a>
+{% endblock %} 

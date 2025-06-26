@@ -50,6 +50,90 @@ A modern web application for structured, role-based employee feedback, supportin
 - Docker (optional, for containerized setup)
 
 
+### Project Setup
+
+
+### 1. Register a User
+
+#### Manager Example
+**Request Body:**
+```json
+{
+  "username": "manager1",
+  "full_name": "Manager 1",
+  "password": "yourpassword",
+  "role": "manager"
+}
+```
+**cURL:**
+```bash
+curl -X POST http://localhost:8000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "manager1",
+    "full_name": "Manager 1",
+    "password": "yourpassword",
+    "role": "manager"
+  }'
+```
+
+#### Employee Example
+**Request Body:**
+```json
+{
+  "username": "employee1",
+  "full_name": "Employee 1",
+  "password": "yourpassword",
+  "role": "employee"
+}
+```
+**cURL:**
+```bash
+curl -X POST http://localhost:8000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "employee1",
+    "full_name": "Employee 1",
+    "password": "yourpassword",
+    "role": "employee"
+  }'
+```
+
+---
+
+### 2. Login to Obtain JWT Token (Manager)
+**cURL:**
+```bash
+curl -X POST http://localhost:8000/api/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=manager1&password=yourpassword"
+```
+**Response:**
+```json
+{
+  "access_token": "<JWT_TOKEN>",
+  "token_type": "bearer"
+}
+```
+
+---
+
+### 3. Manager Adds Employee to Team
+**cURL:**
+```bash
+curl -X POST "http://localhost:8000/api/manager/add_employee?employee_id=<EMPLOYEE_ID>" \
+  -H "Authorization: Bearer <JWT_TOKEN>"
+```
+**Response:**
+```json
+{"status": "ok"}
+```
+
+Replace `<EMPLOYEE_ID>` with the actual employee user's ID and `<JWT_TOKEN>` with the token received from the login step.
+
+---
+
+
 
 ### Backend Setup
 
@@ -69,8 +153,6 @@ A modern web application for structured, role-based employee feedback, supportin
    ```bash
    uvicorn app.main:app --reload
    ```
-4. **Register a user:**
-   - Use the `/api/register` endpoint to create your first user (manager or employee).
 
 #### Run backend via Docker
 1. **Build the Docker image:**
@@ -123,3 +205,4 @@ A modern web application for structured, role-based employee feedback, supportin
 - **Docker**: For easy deployment and consistent environments.
 
 ---
+
